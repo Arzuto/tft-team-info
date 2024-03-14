@@ -63,9 +63,14 @@ func main() {
 	router.PATCH("/class/:id", controllers.UpdateClass)
 	router.DELETE("/class/:id", controllers.DeleteClass)
 
-	router.GET("/item", controllers.GetAllClass)
-	router.POST("/item", controllers.InsertClass)
-	router.PATCH("/item/:id", controllers.UpdateClass)
-	router.DELETE("/item/:id", controllers.DeleteClass)
+	router.GET("/item", controllers.GetAllItem)
+	router.POST("/item", controllers.InsertItem)
+	router.PATCH("/item/:id", controllers.UpdateItem)
+	router.DELETE("/item/:id", controllers.DeleteItem)
+
+	router.GET("/character", controllers.GetAllCharacter)
+	router.POST("/character", controllers.InsertCharacter)
+	router.PATCH("/character/:id", controllers.UpdateCharacter)
+	router.DELETE("/character/:id", controllers.DeleteCharacter)
 	router.Run("localhost:8080")
 }
