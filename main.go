@@ -33,12 +33,19 @@ func main() {
 	} else {
 		fmt.Println("Successfully loaded.env file")
 	}
-	psqlInfo := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
-		os.Getenv("DB_HOST"),
-		os.Getenv("DB_PORT"),
-		os.Getenv("DB_USER"),
-		os.Getenv("DB_PASSWORD"),
-		os.Getenv("DB_NAME"))
+	// psqlInfo := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
+	// 	os.Getenv("DB_HOST"),
+	// 	os.Getenv("DB_PORT"),
+	// 	os.Getenv("DB_USER"),
+	// 	os.Getenv("DB_PASSWORD"),
+	// 	os.Getenv("DB_NAME"))
+
+	psqlInfo := fmt.Sprintf("host=%s  port=%s user=%s password=%s dbname=%s sslmode=disable",
+	os.Getenv("PGHOST"),
+	os.Getenv("PGPORT"),
+	os.Getenv("PGUSER"),
+	os.Getenv("PGPASSWORD"),
+	os.Getenv("PGDATABASE"))
 
 	db, err = sql.Open("postgres", psqlInfo)
 	err = db.Ping()
@@ -79,5 +86,6 @@ func main() {
 	router.PATCH("/recommendation/:id", controllers.BasicAuthMiddleware(), controllers.UpdateRecommendation)
 	router.DELETE("/recommendation/:id", controllers.BasicAuthMiddleware(), controllers.DeleteRecommendation)
 
-	router.Run("localhost:8080")
+	// router.Run("localhost:8080")
+	router.Run(":" + os.Getenv("PORT"))
 }
