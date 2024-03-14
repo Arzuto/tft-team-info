@@ -7,23 +7,18 @@ import (
 )
 
 var (
-	dbConnection *sql.DB
+	DbConnection *sql.DB
 )
 
 func DbMigrate(dbParam *sql.DB) {
-	dbConnection = dbParam
 	migrations := &migrate.FileMigrationSource{
 		Dir: "database/sql_migrations",
 	}
-	count, err := migrate.Exec(dbConnection, "postgres", migrations, migrate.Up)
-	if err != nil {
-		panic(err)
+	n, errs := migrate.Exec(dbParam,"postgres",migrations,migrate.Up)
+	if errs != nil {
+		panic(errs)
 	}
-	fmt.Printf("Applied %d migrations!\n", count)
+	DbConnection = dbParam
 
-	// count, err = migrate.Exec(dbConnection, "postgres", migrations, migrate.Down)
-	// if err != nil {
-	//     panic(err)
-	// }
-	// fmt.Printf("Table %d has been dropped.",count)
+	fmt.Println("Applied" ,n,(" migrations!"))
 }
