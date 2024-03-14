@@ -23,7 +23,7 @@ func GetAllOrigin(c *gin.Context) {
 		}
 	} else {
 		result = gin.H{
-			"Origin Trait": origins,
+			"Origin Trait List": origins,
 		}
 	}
 

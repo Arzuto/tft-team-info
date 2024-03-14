@@ -10,12 +10,12 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func GetAllClass(c *gin.Context) {
+func GetAllItem(c *gin.Context) {
 	var (
 		result gin.H
 	)
 
-	classs, err := repository.GetAllClass(database.DbConnection)
+	items, err := repository.GetAllItem(database.DbConnection)
 
 	if err != nil {
 		result = gin.H{
@@ -23,73 +23,73 @@ func GetAllClass(c *gin.Context) {
 		}
 	} else {
 		result = gin.H{
-			"Class Trait": classs,
+			"Item List": items,
 		}
 	}
 
 	c.JSON(http.StatusOK, result)
 }
 
-func InsertClass(c *gin.Context) {
-	var class structs.Class
+func InsertItem(c *gin.Context) {
+	var item structs.Item
 
-	err := c.ShouldBindJSON(&class)
+	err := c.ShouldBindJSON(&item)
 	if err != nil {
 		panic(err)
 	}
 
-	err = repository.InsertClass(database.DbConnection, class)
+	err = repository.InsertItem(database.DbConnection, item)
 	if err != nil {
 		panic(err)
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"result": "success add class",
+		"result": "success add item",
 	})
 }
 
-func UpdateClass(c *gin.Context) {
-	var class structs.Class
+func UpdateItem(c *gin.Context) {
+	var item structs.Item
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "failed convert id"})
 		return
 	}
 
-	if err := c.ShouldBindJSON(&class); err != nil {
+	if err := c.ShouldBindJSON(&item); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	class.ID = int64(id)
+	item.ID = int64(id)
 
-	err = repository.UpdateClass(database.DbConnection, class)
+	err = repository.UpdateItem(database.DbConnection, item)
 
 	if err != nil {
 		panic(err)
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"result": "success update class",
+		"result": "success update item",
 	})
 }
 
-func DeleteClass(c *gin.Context) {
-	var class structs.Class
+func DeleteItem(c *gin.Context) {
+	var item structs.Item
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "failed convert id"})
 		return
 	}
 
-	class.ID = int64(id)
+	item.ID = int64(id)
 
-	err = repository.DeleteClass(database.DbConnection, class)
+	err = repository.DeleteItem(database.DbConnection, item)
 	if err != nil {
 		panic(err)
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"result": "succes delete class",
+		"result": "succes delete item",
 	})
 }
