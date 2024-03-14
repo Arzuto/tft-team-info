@@ -73,6 +73,11 @@ func main() {
 	router.POST("/character", controllers.InsertCharacter)
 	router.PATCH("/character/:id", controllers.UpdateCharacter)
 	router.DELETE("/character/:id", controllers.DeleteCharacter)
-	
+
+	router.GET("/recommendation", controllers.GetAllRecommendation)
+	router.POST("/recommendation", controllers.InsertRecommendation)
+	router.PATCH("/recommendation/:id", controllers.UpdateRecommendation)
+	router.DELETE("/recommendation/:id", controllers.DeleteRecommendation)
+
 	router.Run("localhost:8080")
 }

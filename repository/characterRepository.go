@@ -8,11 +8,11 @@ import (
 	"github.com/lib/pq"
 )
 
-type IntSliceScanner struct {
+type IntSliceScannerCharacter struct {
 	slice *[]int
 }
 
-func (scanner *IntSliceScanner) Scan(src interface{}) error {
+func (scanner *IntSliceScannerCharacter) Scan(src interface{}) error {
 	pqArray, ok := src.(pq.Int64Array)
 	if !ok {
 		return fmt.Errorf("src is not a pq.Int64Array")
