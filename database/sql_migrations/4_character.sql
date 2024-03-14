@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS character (
     id SERIAL PRIMARY KEY,
     characterName VARCHAR(256) NOT NULL,
     skill VARCHAR(256),
-    originIDs INT[],
+    originID INT,
     classIDs INT[],
     itemIDs INT[]
 );

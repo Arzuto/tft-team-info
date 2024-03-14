@@ -11,23 +11,12 @@ import (
 )
 
 func GetAllCharacter(c *gin.Context) {
-	var (
-		result gin.H
-	)
-
 	characters, err := repository.GetAllCharacter(database.DbConnection)
-
 	if err != nil {
-		result = gin.H{
-			"result": err,
-		}
-	} else {
-		result = gin.H{
-			"Character Trait List": characters,
-		}
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
 	}
-
-	c.JSON(http.StatusOK, result)
+	c.JSON(http.StatusOK, gin.H{"characters": characters})
 }
 
 func InsertCharacter(c *gin.Context) {

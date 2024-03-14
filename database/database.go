@@ -3,6 +3,7 @@ package database
 import (
 	"database/sql"
 	"fmt"
+
 	migrate "github.com/rubenv/sql-migrate"
 )
 
@@ -14,11 +15,13 @@ func DbMigrate(dbParam *sql.DB) {
 	migrations := &migrate.FileMigrationSource{
 		Dir: "database/sql_migrations",
 	}
-	n, errs := migrate.Exec(dbParam,"postgres",migrations,migrate.Up)
+	n, errs := migrate.Exec(dbParam, "postgres", migrations, migrate.Up)
+	// n, errs := migrate.Exec(dbParam, "postgres", migrations, migrate.Down)
 	if errs != nil {
 		panic(errs)
 	}
 	DbConnection = dbParam
 
-	fmt.Println("Applied" ,n,(" migrations!"))
+	fmt.Println("Applied", n, (" migrations!"))
+
 }

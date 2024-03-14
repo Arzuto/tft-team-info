@@ -52,6 +52,7 @@ func main() {
 	database.DbMigrate(db)
 
 	defer db.Close()
+
 	router := gin.Default()
 	router.GET("/origin", controllers.GetAllOrigin)
 	router.POST("/origin", controllers.InsertOrigin)
@@ -72,5 +73,6 @@ func main() {
 	router.POST("/character", controllers.InsertCharacter)
 	router.PATCH("/character/:id", controllers.UpdateCharacter)
 	router.DELETE("/character/:id", controllers.DeleteCharacter)
+	
 	router.Run("localhost:8080")
 }
