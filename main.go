@@ -57,5 +57,10 @@ func main() {
 	router.POST("/origin", controllers.InsertOrigin)
 	router.PATCH("/origin/:id", controllers.UpdateOrigin)
 	router.DELETE("/origin/:id", controllers.DeleteOrigin)
+
+	router.GET("/class", controllers.GetAllClass)
+	router.POST("/class", controllers.InsertClass)
+	router.PATCH("/class/:id", controllers.UpdateClass)
+	router.DELETE("/class/:id", controllers.DeleteClass)
 	router.Run("localhost:8080")
 }
